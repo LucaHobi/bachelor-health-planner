@@ -16,3 +16,21 @@ package/
 
 # Sonstige temporäre Dateien
 *.pdf
+
+# Frontend (Vite/Node)
+frontend/node_modules
+frontend/dist
+frontend/dist-ssr
+*.log
+*.local
+
+# Editor-Dateien
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
