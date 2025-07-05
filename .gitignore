@@ -23,6 +23,8 @@ frontend/dist
 frontend/dist-ssr
 *.log
 *.local
+/node_modules
+**/node_modules
 
 # Editor-Dateien
 .vscode/*

@@ -2,4 +2,32 @@
 curl -X POST https://287x8bq6i6.execute-api.eu-central-1.amazonaws.com/prod/generate \
     -H "Content-Type: application/json" \
     -d '{"name": "Luca"}'
+
+curl -X POST https://f4kw1ii854.execute-api.eu-central-1.amazonaws.com/dev/generate-plan \
+  -H "Content-Type: application/json" \
+  -d '{
+  "dietary_preference": "vegan",
+  "goals": "fit bleiben",
+  "intolerances": "",
+  "fruit_veg_servings": "",
+  "cooking_time": "3",
+  "cooking_skill": "3",
+  "work_context": "",
+  "stress_level": "3",
+  "eating_out_frequency": "",
+  "tiredness": "3",
+  "sleep_quality": "3",
+  "mood": "3",
+  "digestive_issues": "3",
+  "exercise_frequency": "",
+  "weekly_activity": "",
+  "strength_training": "",
+  "health_conditions": "",
+  "pregnancy_status": "",
+  "athlete_status": "",
+  "other_notes": ""
+}
+'
+
+
 ```
