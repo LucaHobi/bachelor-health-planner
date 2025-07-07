@@ -1,0 +1,24 @@
+{
+    "dietary_preference": "vegetarian",
+    "intolerances": "lactose",
+    "fruit_veg_servings": "2 portions per day",
+    "goals": "Increase energy levels and improve sleep quality",
+    "cooking_time": "3",  
+    "cooking_skill": "2",  
+    "work_context": "Office job with long sitting periods",
+    "stress_level": "4",  
+    "eating_out_frequency": "Eats at the canteen for lunch daily",
+    "tiredness": "4", 
+    "sleep_quality": "2", 
+    "mood": "3",  
+    "digestive_issues": "2",  
+    "exercise_frequency": "1x per week yoga",
+    "weekly_activity": "120 minutes total",
+    "strength_training": "no",
+    "health_conditions": "Vitamin D deficiency",
+    "pregnancy_status": "not pregnant",
+    "athlete_status": "no",
+    "other_notes": "Often has cravings for sweets in the evening"
+}
+
+  
