@@ -5,6 +5,7 @@ const Result = ({ planData, onReset }) => {
     if (
         !planData ||
         !planData.nutrition ||
+        !planData.nutrition.nutritionSummary ||
         !planData.nutrition.macroDistribution ||
         !planData.exercise ||
         !planData.mentalHealth
@@ -23,7 +24,7 @@ const Result = ({ planData, onReset }) => {
       }
       console.warn("Unvollständiger Plan:", planData);
 
-  const { nutrition, exercise, mentalHealth, recipes, extra } = planData;
+const { nutrition, exercise, mentalHealth, recipeExample, extraTips } = planData;
 
   return (
     <section className="bg-white w-full max-w-3xl mx-auto rounded-2xl shadow-xl p-8 md:p-10 mt-10 mb-16">
@@ -33,88 +34,90 @@ const Result = ({ planData, onReset }) => {
 
       {/* Ernährung */}
       <Section title="🍏 Ernährung">
-        <p className="mb-4 text-gray-700">{nutrition.summary}</p>
+        <p className="mb-4 text-gray-700">{nutrition.nutritionSummary}</p>
 
         <h4 className="font-semibold text-gray-800 mt-4 mb-1">Makronährstoffverteilung:</h4>
         <ul className="list-disc list-inside mb-4 text-gray-800">
-          <li><strong>Kohlenhydrate:</strong> {nutrition.macroDistribution.carbs}</li>
-          <li><strong>Fett:</strong> {nutrition.macroDistribution.fat}</li>
-          <li><strong>Eiweiß:</strong> {nutrition.macroDistribution.protein}</li>
+            <li><strong>Kohlenhydrate:</strong> {nutrition.macroDistribution.carbs}</li>
+            <li><strong>Fett:</strong> {nutrition.macroDistribution.fat}</li>
+            <li><strong>Eiweiß:</strong> {nutrition.macroDistribution.protein}</li>
         </ul>
+        <p className="text-sm italic text-gray-600">{nutrition.macroDistribution.reasoning}</p>
 
         <h4 className="font-semibold text-gray-800 mt-4 mb-1">Beispiel-Tagesplan:</h4>
-        <ul className="space-y-2">
-          {nutrition.dayPlan.map((entry, idx) => (
-            <li key={idx}>
-              <strong>{entry.meal}:</strong>
-              <ul className="list-disc list-inside pl-4 text-sm text-gray-700">
+        {nutrition.dailyPlan.map((entry, idx) => (
+            <div key={idx} className="mb-4">
+            <p className="font-semibold text-teal-600">{entry.meal}</p>
+            <ul className="list-disc list-inside text-sm text-gray-700 mb-1">
                 {entry.items.map((item, i) => (
-                  <li key={i}>{item}</li>
+                <li key={i}>{item}</li>
                 ))}
-              </ul>
-            </li>
-          ))}
-        </ul>
+            </ul>
+            <p className="text-xs italic text-gray-500">{entry.reasoning}</p>
+            </div>
+        ))}
 
         {nutrition.supplements?.length > 0 && (
-          <>
+            <>
             <h4 className="font-semibold text-gray-800 mt-6 mb-1">Nahrungsergänzung:</h4>
             <ul className="list-disc list-inside text-gray-700 text-sm">
-              {nutrition.supplements.map((supp, i) => (
-                <li key={i}>{supp}</li>
-              ))}
+                {nutrition.supplements.map((supp, i) => (
+                <li key={i}>
+                    <strong>{supp.name}</strong> ({supp.dosage}) – {supp.reasoning}
+                </li>
+                ))}
             </ul>
-          </>
+            </>
         )}
-      </Section>
+        </Section>
+
 
       {/* Bewegung */}
       <Section title="🏃 Bewegung">
-        <ul className="list-disc list-inside text-gray-700 text-sm">
-          <li><strong>Häufigkeit:</strong> {exercise.frequency}</li>
-          <li><strong>Dauer:</strong> {exercise.duration}</li>
-          <li><strong>Art:</strong> {exercise.type}</li>
-        </ul>
+        <p className="text-gray-700 mb-1">{exercise.recommendation}</p>
+        <p className="text-sm text-gray-600 italic">{exercise.reasoning}</p>
       </Section>
+
 
       {/* Mentale Gesundheit */}
       <Section title="🧠 Mentales Wohlbefinden">
-        <p className="text-gray-700">{mentalHealth}</p>
+        <p className="text-gray-700 mb-1">{mentalHealth.recommendation}</p>
+        <p className="text-sm text-gray-600 italic">{mentalHealth.reasoning}</p>
       </Section>
 
+
       {/* Rezepte */}
-      {recipes?.length > 0 && (
-        <Section title="🍽️ Rezeptideen">
-          {recipes.map((recipe, idx) => (
-            <div key={idx} className="mb-4">
-              <h4 className="font-semibold text-gray-800">{recipe.title}</h4>
-              <p className="text-sm text-gray-700 mt-1"><strong>Zutaten:</strong></p>
-              <ul className="list-disc list-inside text-sm text-gray-700 mb-1">
-                {recipe.ingredients.map((ingr, i) => (
-                  <li key={i}>{ingr}</li>
-                ))}
-              </ul>
-              <p className="text-sm text-gray-700"><strong>Zubereitung:</strong></p>
-              <ol className="list-decimal list-inside text-sm text-gray-700">
-                {recipe.steps.map((step, i) => (
-                  <li key={i}>{step}</li>
-                ))}
-              </ol>
-            </div>
-          ))}
+      {recipeExample && (
+        <Section title="🍽️ Rezeptidee">
+        <h4 className="font-semibold text-gray-800">{recipeExample.title}</h4>
+        <p className="text-sm text-gray-700 mt-1"><strong>Zutaten:</strong></p>
+        <ul className="list-disc list-inside text-sm text-gray-700 mb-1">
+            {recipeExample.ingredients.map((ingr, i) => (
+            <li key={i}>{ingr}</li>
+            ))}
+        </ul>
+        <p className="text-sm text-gray-700"><strong>Zubereitung:</strong></p>
+        <ol className="list-decimal list-inside text-sm text-gray-700">
+            {recipeExample.steps.map((step, i) => (
+            <li key={i}>{step}</li>
+            ))}
+        </ol>
+        <p className="text-xs italic text-gray-500 mt-2">{recipeExample.reasoning}</p>
         </Section>
-      )}
+        )}
+
 
       {/* Alltagstipps */}
-      {extra?.length > 0 && (
+      {extraTips?.length > 0 && (
         <Section title="📌 Alltagstipps">
-          <ul className="list-disc list-inside text-sm text-gray-700">
-            {extra.map((tip, i) => (
-              <li key={i}>{tip}</li>
+        <ul className="list-disc list-inside text-sm text-gray-700">
+            {extraTips.map((tip, i) => (
+            <li key={i}>{tip}</li>
             ))}
-          </ul>
+        </ul>
         </Section>
-      )}
+        )}
+
 
       {/* Aktionen */}
       <div className="mt-10 flex justify-center">

@@ -1,3 +1,4 @@
+#./build_lambda_package.sh
 #!/bin/bash
 set -e  # Stoppt bei Fehlern
 
@@ -21,11 +22,11 @@ cp backend/lambda_function.py build/
 
 mkdir -p build/gpt
 cp backend/gpt/__init__.py build/gpt/
-cp backend/gpt/gpt_prompt_v2.py build/gpt/
+cp backend/gpt/gpt_prompt_v3.py build/gpt/
 
 mkdir -p build/validation
 cp backend/validation/__init__.py build/validation/
-cp backend/validation/validate_response.py build/validation/
+cp backend/validation/validate_gpt.py build/validation/
 
 # 4. Deployment ZIP erstellen
 echo "🗜️ Erzeuge deployment.zip …"

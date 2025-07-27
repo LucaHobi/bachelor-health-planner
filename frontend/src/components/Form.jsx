@@ -73,7 +73,6 @@ const Form = ({ onSubmit }) => {
       
         setErrors({});
         setLoading(true);
-        //await new Promise((resolve) => setTimeout(resolve, 2000));// Simulate backend delay
 
         try {
             const response = await fetch("https://f4kw1ii854.execute-api.eu-central-1.amazonaws.com/dev/generate-plan", {
@@ -85,9 +84,7 @@ const Form = ({ onSubmit }) => {
             const result = await response.json();
             console.log("Antwort von Lambda:", result);
         
-            const parsed = JSON.parse(result.recommendation);
-            onSubmit(parsed);
-            
+            onSubmit(result.recommendation);
         } catch (error) {
             console.error("Fehler beim Erstellen des Plans:", error);
             alert("Es ist ein Fehler aufgetreten. Bitte versuche es später erneut.");
@@ -102,7 +99,7 @@ const Form = ({ onSubmit }) => {
             className="bg-white w-full max-w-3xl mx-auto rounded-2xl shadow-xl p-8 md:p-10"
         >
             <h2 className="text-2xl md:text-3xl font-bold text-center text-teal-700 mb-8">
-                Dein persönlicher Gesundheitsprofil
+                Dein persönliches Gesundheitsprofil
             </h2>
 
             <form onSubmit={handleSubmit}  className={`space-y-6 p-4 rounded-xl transition-all ${
@@ -144,6 +141,8 @@ const Form = ({ onSubmit }) => {
                         type="number"
                         value={formData.fruit_veg_servings}
                         onChange={handleChange}
+                        min={0}
+                        max={15}
                         error={errors.fruit_veg_servings}
                         inputRef={fieldRefs.fruit_veg_servings}
                     />
@@ -251,6 +250,8 @@ const Form = ({ onSubmit }) => {
                         label="Bewegung pro Woche (in Minuten)"
                         name="weekly_activity"
                         type="number"
+                        min={0}
+                        max={10000}
                         value={formData.weekly_activity}
                         onChange={handleChange}
                     />
@@ -258,6 +259,8 @@ const Form = ({ onSubmit }) => {
                         label="Krafttraining pro Woche (Anzahl Einheiten)"
                         name="strength_training"
                         type="number"
+                        min={0}
+                        max={15}
                         value={formData.strength_training}
                         onChange={handleChange}
                     />
@@ -392,6 +395,8 @@ const FormGroup = ({
                 id={name}
                 value={value}
                 onChange={onChange}
+                min={min}
+                max={max}
                 className={`w-full p-2 border ${error ? 'border-red-500' : 'border-gray-300'} rounded focus:outline-none focus:ring-2 focus:ring-teal-400`}
             />
             {error && <p className="text-sm text-orange-600 mt-1">{error}</p>}

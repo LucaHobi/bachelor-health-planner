@@ -1,6 +1,6 @@
 import json
-from gpt.gpt_prompt_v2 import ask_gpt
-from validation.validate_response import validate_gpt_nutrition_response
+from gpt.gpt_prompt_v3 import ask_gpt
+from validation.validate_gpt import validate_gpt_output_full
 
 def lambda_handler(event, context):
     try:
@@ -11,10 +11,13 @@ def lambda_handler(event, context):
         user_data = json.loads(event["body"])
 
         # GPT-Abfrage
-        gpt_result = ask_gpt(user_data)
+        gpt_result_str = ask_gpt(user_data)
+
+        # GPT-Antwort in JSON umwandeln
+        gpt_result = json.loads(gpt_result_str)
 
         # Validierung
-        warnings = validate_gpt_nutrition_response(gpt_result)
+        warnings = validate_gpt_output_full(gpt_result, user_data)
 
         # Antwort zurückgeben
         return _response(200, {
@@ -22,6 +25,8 @@ def lambda_handler(event, context):
             "warnings": warnings
         })
 
+    except json.JSONDecodeError as e:
+        return _response(500, {"error": f"Ungültiges JSON: {str(e)}"})
     except Exception as e:
         return _response(500, {"error": str(e)})
 
