@@ -75,7 +75,7 @@ const Form = ({ onSubmit }) => {
         setLoading(true);
 
         try {
-            const response = await fetch("https://f4kw1ii854.execute-api.eu-central-1.amazonaws.com/dev/generate-plan", {
+            const response = await fetch("<API-Endpoint hier einfügen>", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(formData), // Achtung: Kein { body: formData }!

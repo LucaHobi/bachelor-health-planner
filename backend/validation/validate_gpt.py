@@ -1,4 +1,4 @@
-def validate_gpt_output_full(gpt_response: dict, user_data: dict) -> dict:
+def validate_gpt_output(gpt_response: dict, user_data: dict) -> dict:
     """Erweiterte Validierung der GPT-Antwort inkl. Regeln für vegetarische und vegane Ernährung nach DGE, WHO, Harvard."""
     report = {
         "supplements": {"status": "OK", "message": ""},

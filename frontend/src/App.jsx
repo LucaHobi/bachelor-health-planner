@@ -3,17 +3,8 @@ import React, { useState } from "react";
 import Form from "./components/Form";
 import Result from "./components/Result";
 
-// Beispielplan
-/*const examplePlanData = {
-  nutrition: "Iss täglich 5 Portionen Gemüse und achte auf komplexe Kohlenhydrate wie Vollkornprodukte.",
-  exercise: "Plane 3x/Woche 30 Minuten Bewegung ein – z. B. Spaziergänge oder Yoga.",
-  mentalHealth: "Versuche täglich 10 Minuten Entspannung einzuplanen. Atemübungen können helfen.",
-  extra: "Wenn du wenig Zeit zum Kochen hast, plane einfache, schnelle Gerichte mit wenigen Zutaten ein.",
-  pdfUrl: "/pdfs/dein-gesundheitsplan.pdf"
-};*/
-
 function App() {
-  const [planData, setPlanData] = useState(null); // ⬅️ Zustand für Ergebnis
+  const [planData, setPlanData] = useState(null); // Zustand für Ergebnis
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50 flex flex-col">

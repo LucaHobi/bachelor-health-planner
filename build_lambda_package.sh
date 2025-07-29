@@ -1,5 +1,4 @@
 #./build_lambda_package.sh
-#!/bin/bash
 set -e  # Stoppt bei Fehlern
 
 echo "📦 Starte Lambda-Build-Prozess …"
@@ -22,7 +21,7 @@ cp backend/lambda_function.py build/
 
 mkdir -p build/gpt
 cp backend/gpt/__init__.py build/gpt/
-cp backend/gpt/gpt_prompt_v3.py build/gpt/
+cp backend/gpt/gpt_prompt.py build/gpt/
 
 mkdir -p build/validation
 cp backend/validation/__init__.py build/validation/

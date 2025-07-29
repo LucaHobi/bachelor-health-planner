@@ -2,4 +2,4 @@
 GPT-Aufforderungslogik und OpenAI-Integrationsmodul.
 """
 
-from .gpt_prompt_v3 import ask_gpt
+from .gpt_prompt import ask_gpt

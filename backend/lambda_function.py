@@ -1,6 +1,6 @@
 import json
-from gpt.gpt_prompt_v3 import ask_gpt
-from validation.validate_gpt import validate_gpt_output_full
+from gpt.gpt_prompt import ask_gpt
+from validation.validate_gpt import validate_gpt_output
 
 def lambda_handler(event, context):
     try:
@@ -17,7 +17,7 @@ def lambda_handler(event, context):
         gpt_result = json.loads(gpt_result_str)
 
         # Validierung
-        warnings = validate_gpt_output_full(gpt_result, user_data)
+        warnings = validate_gpt_output(gpt_result, user_data)
 
         # Antwort zurückgeben
         return _response(200, {
